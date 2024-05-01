@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MalibuPago</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Ajustar al tamaño de la ventana */
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Escalar el video para cubrir el área del contenedor */
+        }
+
+        .content {
+            position: absolute;
+            top: 50%; /* Centrar verticalmente */
+            left: 50%; /* Centrar horizontalmente */
+            transform: translate(-50%, -50%); /* Centrar completamente */
+            text-align: center;
+            color: white;
+        }
+
+        h1, h2, h3 {
+            color: #7a4f75; /* Morado */
+        }
+
+        p {
+            color: #e88d67; /* Naranja */
+        }
+
+        button {
+            background-color: #c94c4c; /* Rojo oscuro */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #a82b2b; /* Rojo más oscuro al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+    <div class="video-wrapper">
+        <video autoplay muted loop>
+            <source src="https://cdn.pixabay.com/video/2023/09/10/179956-862981973_large.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="content">
+            <h1>Realizar Pago</h1>
+            <p>Monto a pagar: <span id="monto"></span> soles</p>
+            <button id="pagarButton">Pagar</button>
+        </div>
+    </div>
+
+    <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        var monto = getParameterByName('monto');
+        document.getElementById('monto').textContent = monto;
+
+        function mostrarProcesandoPago() {
+            alert('Procesando pago...');
+            setTimeout(mostrarPagoExitoso, 15000); // Mostrar pago exitoso después de 15 segundos
+        }
+
+        function mostrarPagoExitoso() {
+            alert('¡Pago exitoso!');
+        }
+
+        document.getElementById('pagarButton').addEventListener('click', function() {
+            mostrarProcesandoPago();
+            // Aquí puedes agregar código adicional para notificar a tu aplicación de Java
+        });
+    </script>
+</body>
+</html>
